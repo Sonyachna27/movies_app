@@ -1,0 +1,32 @@
+.container {
+  max-width: 1200px;
+  padding: 0 10px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.btn {
+  display: flex;
+  padding: 15px 0;
+  max-width: 150px;
+  width: 100%;
+  border-radius: 500px;
+  border: 1px solid transparent;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s linear;
+  background: #53ecb7;
+  color: #fff;
+  &:hover {
+    transform: translate(0, -10px);
+    border-color: blue;
+    color: blue;
+  }
+}

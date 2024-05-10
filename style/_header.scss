@@ -1,0 +1,26 @@
+header {
+  padding: 20px 0;
+  background: #53ecb7;
+  color: #fff;
+  font-size: 25px;
+  position: sticky;
+  height: auto;
+  width: 100%;
+}
+nav {
+  display: flex;
+  width: 100%;
+  & ul {
+    display: flex;
+    max-width: 100%;
+    place-content: center;
+    width: 100%;
+    gap: 20px;
+    :any-link {
+      transition: 0.3s cubic-bezier(0.4, 0, 1, 1);
+      &:hover {
+        transform: translate(0, -5px);
+      }
+    }
+  }
+}
