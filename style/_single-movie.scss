@@ -1,0 +1,25 @@
+.single-movie {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  & h1 {
+    font-size: 30px;
+    color: rgb(6, 74, 6);
+  }
+  & ul {
+    display: flex;
+    gap: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    & a {
+      cursor: pointer;
+    }
+  }
+  & img {
+    max-width: 700px;
+    width: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
+}

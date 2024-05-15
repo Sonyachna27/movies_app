@@ -25,8 +25,9 @@ const loadPage = (page) => {
     .catch((err) => console.error(err));
 };
 
+const movieContainer = document.getElementById("movie-list");
+
 function createNewMovieCard(movies) {
-  const movieContainer = document.getElementById("movie-list");
   movies.forEach((movie) => {
     const createMovieCard = document.createElement("div");
     createMovieCard.classList.add("movie");
@@ -43,7 +44,7 @@ function createNewMovieCard(movies) {
     playLink.dataset.movieId = movie.id;
     playLink.classList.add("play_btn");
     playLink.href = `http://127.0.0.1:5500/single-movie.html?movieId=${movie.id}`;
-    playLink.textContent = "Play";
+    playLink.textContent = "More...";
 
     const movieImageLink = document.createElement("a");
     movieImageLink.href = "#";
@@ -53,6 +54,7 @@ function createNewMovieCard(movies) {
 
     movieImage.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
     movieImage.alt = movie.title;
+
     movieImageLink.appendChild(movieImage);
     createMovieCard.appendChild(movieCardTitle);
     createMovieCard.appendChild(movieCardDescription);
@@ -79,7 +81,6 @@ const loadMore = document.querySelector(".loadMore");
 if (loadMore) {
   loadMore.addEventListener("click", () => {
     numberPage++;
-
     loadPage(numberPage);
   });
 
@@ -97,17 +98,14 @@ if (movieId != null) {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const filmData = data;
         createNewMovie(filmData);
       })
       .catch((err) => console.error(err));
   };
-  showMovieInfo(movieId);
 
+  const singleMoveWrap = document.getElementById("movie-page");
   function createNewMovie(filmData) {
-    const singleMoveWrap = document.getElementById("movie-page");
-
     const createMovieWrap = document.createElement("div");
     createMovieWrap.classList.add("single-movie");
 
@@ -131,9 +129,55 @@ if (movieId != null) {
     moviePoster.alt = filmData.title;
 
     createMovieWrap.appendChild(movieTitle);
-    createMovieWrap.appendChild(movieOverview);
-    createMovieWrap.appendChild(moviePoster);
     createMovieWrap.appendChild(genresList);
+
+    createMovieWrap.appendChild(moviePoster);
+    createMovieWrap.appendChild(movieOverview);
+
     singleMoveWrap.appendChild(createMovieWrap);
   }
+
+  const showVideoMovie = (movieId) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key={322f6cd0a700c2a7995493d0bf2284d9}`,
+      options
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const videos = data.results;
+        let videoKey;
+        if (videos.length > 0) {
+          const findId = () => {
+            for (let i = 0; i < videos.length; i++) {
+              if (videos[i].name == "Official Teaser") {
+                videoKey = videos[i].key;
+                return;
+              }
+            }
+            videoKey = videos[0].key;
+          };
+          findId();
+
+          const videoUrl = `https://www.youtube.be/watch?v=${videoKey}`;
+
+          createVideoPlayer(videoUrl);
+        } else {
+          console.error("Відео не знайдено");
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const createVideoPlayer = (videoUrl) => {
+    const createVideoPlayer = document.createElement("div");
+    const createYoutubeLink = document.createElement("a");
+    createYoutubeLink.classList.add("link");
+    createYoutubeLink.href = videoUrl;
+    createYoutubeLink.textContent = "Watch on You Tube";
+    createVideoPlayer.appendChild(createYoutubeLink);
+    singleMoveWrap.appendChild(createVideoPlayer);
+  };
+
+  showMovieInfo(movieId);
+  showVideoMovie(movieId);
 }
