@@ -43,7 +43,7 @@ function createNewMovieCard(movies) {
     playLink.classList.add("btn");
     playLink.dataset.movieId = movie.id;
     playLink.classList.add("play_btn");
-    playLink.href = `/single-movie.html?movieId=${movie.id}`;
+    playLink.href = `movies_app/single-movie.html?movieId=${movie.id}`;
     playLink.textContent = "More...";
 
     const movieImageLink = document.createElement("a");
