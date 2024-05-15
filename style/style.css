@@ -204,4 +204,31 @@ nav ul :any-link:hover {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: inherit;
+}
+
+.single-movie {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.single-movie h1 {
+  font-size: 30px;
+  color: rgb(6, 74, 6);
+}
+.single-movie ul {
+  display: flex;
+  gap: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.single-movie ul a {
+  cursor: pointer;
+}
+.single-movie img {
+  max-width: 700px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0 auto;
+  border-radius: 20px;
 }/*# sourceMappingURL=style.css.map */
