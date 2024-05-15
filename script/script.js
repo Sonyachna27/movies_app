@@ -68,7 +68,7 @@ function createNewMovieCard(movies) {
       const selectedMovieId = playLink.dataset.movieId;
       showMovieInfo(selectedMovieId)
         .then(() => {
-          window.location.href = `/single-movie.html?movieId=${selectedMovieId}`;
+          window.location.href = `https://sonyachna27.github.io/movies_app/single-movie.html?movieId=${selectedMovieId}`;
         })
         .catch((error) => {
           console.error(error);
