@@ -43,7 +43,7 @@ function createNewMovieCard(movies) {
     playLink.classList.add("btn");
     playLink.dataset.movieId = movie.id;
     playLink.classList.add("play_btn");
-    playLink.href = `http://127.0.0.1:5500/single-movie.html?movieId=${movie.id}`;
+    playLink.href = `/single-movie.html?movieId=${movie.id}`;
     playLink.textContent = "More...";
 
     const movieImageLink = document.createElement("a");
@@ -64,16 +64,16 @@ function createNewMovieCard(movies) {
 
     movieContainer.appendChild(createMovieCard);
 
-    playLink.addEventListener("click", (event) => {
-      const selectedMovieId = playLink.dataset.movieId;
-      showMovieInfo(selectedMovieId)
-        .then(() => {
-          window.location.href = `https://sonyachna27.github.io/movies_app/single-movie.html?movieId=${selectedMovieId}`;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
+    // playLink.addEventListener("click", (event) => {
+    //   const selectedMovieId = playLink.dataset.movieId;
+    //   showMovieInfo(selectedMovieId)
+    //     .then(() => {
+    //       window.location.href = `https://sonyachna27.github.io/movies_app/single-movie.html?movieId=${selectedMovieId}`;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // });
   });
 }
 
