@@ -206,6 +206,15 @@ nav ul :any-link:hover {
   border-radius: inherit;
 }
 
+.link {
+  padding: 15px;
+  background-color: #53ecb7;
+  border-radius: 500px;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #fff;
+}
+
 .single-movie {
   display: flex;
   flex-direction: column;
@@ -220,6 +229,7 @@ nav ul :any-link:hover {
   gap: 15px;
   font-size: 16px;
   font-weight: 600;
+  margin: 15px 0;
 }
 .single-movie ul a {
   cursor: pointer;
