@@ -75,6 +75,7 @@ if (movieId != null) {
 	function createNewMovie(filmData) {
 		function createGenresList(genresName) {
 			const genresList = document.createElement('ul');
+			genresList.classList.add('genres-list')
 			genresName.forEach((genre) => {
 				const createGenresItem = document.createElement('li');
 				const createGenresItemLink = document.createElement('a');
@@ -135,13 +136,12 @@ if (movieId != null) {
   };
 
   const createVideoPlayer = (videoUrl) => {
-    const createVideoPlayer = document.createElement("div");
     const createYoutubeLink = document.createElement("a");
     createYoutubeLink.classList.add("link");
     createYoutubeLink.href = videoUrl;
     createYoutubeLink.textContent = "Watch preview on  YouTube";
-    createVideoPlayer.appendChild(createYoutubeLink);
-    singleMoveWrap.appendChild(createVideoPlayer);
+    // createVideoPlayer.appendChild(createYoutubeLink);
+    singleMoveWrap.appendChild(createYoutubeLink);
   };
 
   showMovieInfo(movieId);
