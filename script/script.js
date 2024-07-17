@@ -31,49 +31,16 @@ function createNewMovieCard(movies) {
   movies.forEach((movie) => {
     const createMovieCard = document.createElement("div");
     createMovieCard.classList.add("movie");
-    const movieCardTitle = document.createElement("div");
-    movieCardTitle.classList.add("movie_title");
-    movieCardTitle.textContent = movie.title;
+		createMovieCard.innerHTML = `
 
-    const movieCardDescription = document.createElement("div");
-    movieCardDescription.classList.add("movie_descr");
-    movieCardDescription.textContent = movie.overview;
-
-    const playLink = document.createElement("a");
-    playLink.classList.add("btn");
-    playLink.dataset.movieId = movie.id;
-    playLink.classList.add("play_btn");
-    playLink.href = `movies_app/single-movie.html?movieId=${movie.id}`;
-    playLink.textContent = "More...";
-
-    const movieImageLink = document.createElement("a");
-    movieImageLink.href = "#";
-    movieImageLink.classList.add("movie_image");
-
-    const movieImage = document.createElement("img");
-
-    movieImage.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-    movieImage.alt = movie.title;
-
-    movieImageLink.appendChild(movieImage);
-    createMovieCard.appendChild(movieCardTitle);
-    createMovieCard.appendChild(movieCardDescription);
-
-    createMovieCard.appendChild(movieImageLink);
-    createMovieCard.appendChild(playLink);
-
+		<div class="movie_title">${movie.title}</div>
+		<div class="movie_descr">${movie.overview}</div>
+		<a href="#" class="movie_image">
+		<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+		</a>
+		<a class="btn play_btn" data-movie-id="${movie.id}" href="./single-movie.html?movieId=${movie.id}">More...</a>`
     movieContainer.appendChild(createMovieCard);
 
-    // playLink.addEventListener("click", (event) => {
-    //   const selectedMovieId = playLink.dataset.movieId;
-    //   showMovieInfo(selectedMovieId)
-    //     .then(() => {
-    //       window.location.href = `https://sonyachna27.github.io/movies_app/single-movie.html?movieId=${selectedMovieId}`;
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // });
   });
 }
 
@@ -105,37 +72,36 @@ if (movieId != null) {
   };
 
   const singleMoveWrap = document.getElementById("movie-page");
-  function createNewMovie(filmData) {
-    const createMovieWrap = document.createElement("div");
-    createMovieWrap.classList.add("single-movie");
-
-    const movieTitle = document.createElement("h1");
-    movieTitle.textContent = filmData.title;
-
-    const movieOverview = document.createElement("p");
-    movieOverview.textContent = filmData.overview;
-    const genresList = document.createElement("ul");
-    const genresName = filmData.genres;
-    genresName.forEach((genre) => {
-      let genresItem = document.createElement("li");
-      let genresItemLink = document.createElement("a");
-      genresItemLink.textContent = genre.name;
-      genresItem.appendChild(genresItemLink);
-      genresList.appendChild(genresItem);
-    });
-
-    const moviePoster = document.createElement("img");
-    moviePoster.src = `https://image.tmdb.org/t/p/w500/${filmData.poster_path}`;
-    moviePoster.alt = filmData.title;
-
-    createMovieWrap.appendChild(movieTitle);
-    createMovieWrap.appendChild(genresList);
-
-    createMovieWrap.appendChild(moviePoster);
-    createMovieWrap.appendChild(movieOverview);
-
-    singleMoveWrap.appendChild(createMovieWrap);
-  }
+	function createNewMovie(filmData) {
+		function createGenresList(genresName) {
+			const genresList = document.createElement('ul');
+			genresName.forEach((genre) => {
+				const createGenresItem = document.createElement('li');
+				const createGenresItemLink = document.createElement('a');
+				createGenresItemLink.innerText = genre.name;
+				createGenresItem.appendChild(createGenresItemLink);
+				createGenresItem.appendChild(createGenresItemLink);
+				genresList.appendChild(createGenresItem);
+			});
+			return genresList; 
+		}
+	
+		const createMovieWrap = document.createElement("div");
+		createMovieWrap.classList.add("single-movie");
+	
+		const genresName = filmData.genres;
+		const genresList = createGenresList(genresName);
+	
+		createMovieWrap.innerHTML = `
+			<h1>${filmData.title}</h1>
+			<p>${filmData.overview}</p>
+			<img src="https://image.tmdb.org/t/p/w500/${filmData.poster_path}" alt="test" />
+		`;
+	
+		createMovieWrap.appendChild(genresList);
+		singleMoveWrap.appendChild(createMovieWrap);
+	}
+	
 
   const showVideoMovie = (movieId) => {
     fetch(
@@ -173,7 +139,7 @@ if (movieId != null) {
     const createYoutubeLink = document.createElement("a");
     createYoutubeLink.classList.add("link");
     createYoutubeLink.href = videoUrl;
-    createYoutubeLink.textContent = "Watch on You Tube";
+    createYoutubeLink.textContent = "Watch preview on  YouTube";
     createVideoPlayer.appendChild(createYoutubeLink);
     singleMoveWrap.appendChild(createVideoPlayer);
   };
